@@ -1,6 +1,7 @@
 import React from "react";
-import "./notes.scss";
+import n from "./notes.module.scss";
 import edit_img from "../../assets/images/edit_icon.png";
+import dumpster from "../../assets/images/dumpster_icon.png"
 const Notes = () => {
   const notes = new Array(3)
     .fill("")
@@ -10,9 +11,10 @@ const Notes = () => {
       <h2>Tasks</h2>
       <ul>
         {notes.map((note) => (
-          <li key={note.id} className="notes_items">
+          <li key={note.id} className={n.notes_items}>
             {note?.tittle}
-            <img src={edit_img} alt="edit img" />
+            <img className={n.edit_img} src={edit_img} alt="edit img" />
+            <img src={dumpster} alt="dumpster img" />
           </li>
           
         ))}
