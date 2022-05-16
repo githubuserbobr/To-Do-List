@@ -1,12 +1,22 @@
-import React from "react";
-import "./form.scss";
+import React, { useState } from "react";
+import f from"./form.module.scss";
 const Form = () => {
+  const [value, setValue] = useState()
+  const handleSubmit = (event) => {
+    event.preventDefault()
+
+    if (value.trim()) {
+      
+    }
+  }
+  console.log(value)
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div>
         <input
           placeholder=" + Add a task, press Enter to save"
-          className="input"
+          className={f.input}
+          onChange={(e) => setValue(e.currentTarget.value)}
         ></input>
       </div>
     </form>
