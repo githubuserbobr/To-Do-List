@@ -7,6 +7,6 @@ export const UsersApi = {
         return instance.post()
     },
     getUsers() {
-        return instance.get('/6')
+        return instance.get('/5')
     }
 }

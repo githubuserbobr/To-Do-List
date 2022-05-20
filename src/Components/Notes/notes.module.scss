@@ -1,16 +1,28 @@
+.notes_wrapper {
+    width: clamp(350px, 100%, 1980px);
+}
 .edit_img {
+    cursor: pointer;
     margin-left: 1100px;
     margin-right: 10px;
+    width: 20px;
+    height: 22px;
+}
+.dumpster {
+    cursor: pointer;
+    width: 20px;
+    height: 22px;  
 }
 h2 {
     margin-left: 20px;
 }
     .notes_items {
+        flex-wrap: nowrap;
         display: flex;
         padding: 16px 12px;
 
         max-width: 1228px;
-        max-height: 48px;
+        min-height: 48px;
 
         background: #FFFFFF;
         box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.08);
