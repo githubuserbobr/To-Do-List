@@ -18,7 +18,7 @@ const Header = () => {
         <div className={h.right_block}>
           <span className={h.initials}>Valera Kozhevnikov</span>
           <UserPhoto className={h.user_photo} />
-          <img src={arrow} alt="arrow" />
+          <img src={arrow} className={h.arrow} alt="arrow" />
         </div>
       </div>
     </>

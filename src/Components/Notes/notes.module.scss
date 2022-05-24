@@ -1,14 +1,15 @@
-.notes_wrapper {
-    width: clamp(350px, 100%, 1980px);
-}
+
 .edit_img {
+    display: flex;
+    justify-content: end;
     cursor: pointer;
-    margin-left: 1100px;
     margin-right: 10px;
     width: 20px;
     height: 22px;
 }
 .dumpster {
+    display: flex;
+    justify-content: end;
     cursor: pointer;
     width: 20px;
     height: 22px;  

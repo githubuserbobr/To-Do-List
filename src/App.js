@@ -3,9 +3,11 @@ import './App.css';
 import Form from './Components/Form/Form';
 import Header from './Components/Header/Header';
 import Notes from './Components/Notes/Notes';
-import { AppReducer, ContextApp, initialState } from './store/reducer';
+import { ContextApp } from './context/context';
+import { AppReducer, initialState } from './store/reducer';
 function App() {
   const [state, dispatch] = useReducer(AppReducer, initialState)
+  console.log(state)
   return (
     <ContextApp.Provider value={{state, dispatch}}>
     <Header/>
