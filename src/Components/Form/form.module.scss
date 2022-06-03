@@ -1,3 +1,10 @@
+.form_wrapper {
+    margin-left: 55px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: end;
+}
+
 .input {
     width: 1000px;
     height: 40px;
@@ -9,6 +16,8 @@
 }
 
 .addButton {
+    margin-left: 5px;
+    margin-bottom: 3px;
     cursor: pointer;
     padding: 5px 12px;
     width: 50px;

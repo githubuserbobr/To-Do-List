@@ -1,43 +1,66 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import n from "./notes.module.scss";
-import edit_img from "../../assets/images/edit_icon.png";
-import dumpster from "../../assets/images/dumpster_icon.png";
 import { ContextApp } from "../../context/context";
-import { fetchNotes, removeNotes, toggleIsLoading } from "../../store/reducer";
+import {
+  fetchNotes,
+  removeNotes,
+  toggleIsLoading,
+  toggleEditNote,
+} from "../../store/reducer";
 import { UsersApi } from "../../api/api";
-import { ReactComponent as Loader } from "../../assets/loader/loader.svg";
+import NotesItems from "./NotesItems";
+
 const Notes = () => {
-  const { state, dispatch } = useContext(ContextApp);
-  console.log(state);
+  debugger
+  const {
+    state,
+    dispatch,
+    setInputState,
+    setInputId,
+    setCompleteNotes,
+    CompleteNotes,
+  } = useContext(ContextApp);
+
   // make a request for API and dispatch
   useEffect(() => {
     debugger;
     UsersApi.getUsers().then((response) => {
       dispatch(fetchNotes(response.data.title, response.data.id));
+      dispatch(toggleIsLoading(false));
     });
   }, []);
-  debugger;
 
+  // const handleChange = (e) => {
+  //   debugger;
+  //   let isChecked = e.target.checked;
+  //   return null;
+  // };
+
+  if (state.isLoading) {
+    return "        rrrrrrrr                              loading...";
+  }
   return (
     <div className={n.notes_wrapper}>
       <h2>Tasks</h2>
       <ul>
-        {state.notes.map((note, index) => (
-          <li key={note.index} className={n.notes_items}>
-            <strong>{note.title}</strong>
-            <p>id:{index}</p>
-            <input className={n.checkbox} type="checkbox" />
-            <img className={n.edit_img} src={edit_img} alt="edit img" />
-            <img
-              onClick={() => dispatch(removeNotes(note.id))}
-              className={n.dumpster}
-              src={dumpster}
-              alt="dumpster img"
+        {state.notes.map((note, index) => {
+          debugger;
+          return (
+            <NotesItems
+              index={index}
+              note={note.title}
+              setInputState={setInputState}
+              setInputId={setInputId}
+              dispatch={dispatch}
+              toggleEditNote={toggleEditNote}
+              removeNotes={removeNotes}
+              id={note.id}
+              CompleteNotes={CompleteNotes}
+              setCompleteNotes={setCompleteNotes}
             />
-          </li>
-        ))}
+          );
+        })}
       </ul>
-      <Loader />
     </div>
   );
 };

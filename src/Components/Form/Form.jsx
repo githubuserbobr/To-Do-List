@@ -1,13 +1,21 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { ContextApp } from "../../context/context";
-import { addNotes } from "../../store/reducer";
+import { addNotes, editNotes } from "../../store/reducer";
 import f from "./form.module.scss";
 const Form = () => {
-  const [value, setValue] = useState();
-  const { dispatch } = useContext(ContextApp);
+  const { dispatch, state, inputState, setInputState, inputId } = useContext(ContextApp);
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(addNotes(value));
+    if (!state.editMode) {
+      dispatch(addNotes(inputState))
+      setInputState('')
+    }
+    else {
+      debugger
+      return (
+        dispatch(editNotes(inputState,inputId)),
+        setInputState(''))
+    }
   };
 
   return (
@@ -15,10 +23,11 @@ const Form = () => {
       <div className={f.form_wrapper}>
         <input
           required
+          value={inputState}
           type="text"
           placeholder=" + Add a task, press Enter to save"
           className={f.input}
-          onChange={(e) => setValue(e.currentTarget.value)}
+          onChange={(e) => setInputState(e.currentTarget.value)}
         ></input>
         <button className={f.addButton}>Add</button>
       </div>

@@ -1,0 +1,24 @@
+.navbar {
+    width: 52px;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 10;
+    left: 0;
+    background-color: #550DC9;
+    box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.1);
+
+    .navbar_block {
+        width: 52px;
+        height: 32px;
+        background: #440BA0;
+        margin-top: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 8px 0px;
+    }
+}
+.p {
+    margin-left: 90px;
+}
