@@ -11,7 +11,6 @@ const Form = () => {
       setInputState('')
     }
     else {
-      debugger
       return (
         dispatch(editNotes(inputState,inputId)),
         setInputState(''))

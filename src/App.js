@@ -11,7 +11,7 @@ function App() {
   const [state, dispatch] = useReducer(AppReducer, initialState);
   const [inputState, setInputState] = useState("");
   const [inputId, setInputId] = useState();
-  const [completeNotes, setCompleteNotes] = useState()
+  const [completeNotes, setCompleteNotes] = useState(null)
   return (
     <ContextApp.Provider
       value={{

@@ -4,6 +4,7 @@ import {
   FETCH_NOTES,
   REMOVE_NOTE,
   TOGGLE_EDIT_MODE,
+  TOGGLE_IS_COMPLETED,
   TOGGLE_IS_LOADING,
 } from "./types";
 
@@ -13,13 +14,13 @@ export const initialState = {
   notes: [{
     title: null,
     id: new Date().valueOf(),
+    isCompleted: false
   },],
 };
 
 export const AppReducer = (state, action) => {
   switch (action.type) {
     case ADD_NOTE:
-      debugger;
       return {
         ...state,
         notes: [
@@ -30,8 +31,17 @@ export const AppReducer = (state, action) => {
           },
         ],
       };
+      case TOGGLE_IS_COMPLETED: 
+      return {
+        ...state,
+        notes: state.notes.map(item => {
+          if(item.id === action.id) {
+            return {...item, isCompleted: !item.isCompleted }
+          }
+          return item
+        })
+      }
     case REMOVE_NOTE:
-      debugger;
       {
         const filteredNote = state.notes.filter(
           (notes) => action.payload !== notes.id
@@ -39,13 +49,11 @@ export const AppReducer = (state, action) => {
         return { notes: filteredNote };
       }
     case TOGGLE_IS_LOADING:
-      debugger;
       return {
         ...state,
         isLoading: action.payload,
       };
     case FETCH_NOTES:
-      debugger;
       return {
         editMode: false,
         isLoading: true,
@@ -53,11 +61,11 @@ export const AppReducer = (state, action) => {
           {
             title: action.payload,
             id: action.id,
+            isCompleted: false
           },
         ],
       };
     case TOGGLE_EDIT_MODE:
-      debugger;
       return {
         ...state,
         notes: [...state.notes],
@@ -65,7 +73,6 @@ export const AppReducer = (state, action) => {
       };
 
     case EDIT_NOTES:
-      debugger;
       let i = state.notes.findIndex(item => item.id === action.id)
       state.notes[i].title = action.payload
       return {
@@ -84,7 +91,12 @@ export const fetchNotes = (title, id) => {
     id,
   };
 };
-
+export const toggleIsCompleted = (id) => {
+  return {
+    type: TOGGLE_IS_COMPLETED, 
+    id
+  }
+}
 export const toggleIsLoading = (value) => {
   return {
     type: TOGGLE_IS_LOADING,

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import n from "./notes.module.scss";
 import { ContextApp } from "../../context/context";
 import {
@@ -9,44 +9,38 @@ import {
 } from "../../store/reducer";
 import { UsersApi } from "../../api/api";
 import NotesItems from "./NotesItems";
+import { SpringSpinner } from "react-epic-spinners";
 
 const Notes = () => {
-  debugger
   const {
     state,
     dispatch,
     setInputState,
     setInputId,
     setCompleteNotes,
-    CompleteNotes,
+    completeNotes,
   } = useContext(ContextApp);
 
   // make a request for API and dispatch
   useEffect(() => {
-    debugger;
     UsersApi.getUsers().then((response) => {
       dispatch(fetchNotes(response.data.title, response.data.id));
       dispatch(toggleIsLoading(false));
     });
-  }, []);
-
-  // const handleChange = (e) => {
-  //   debugger;
-  //   let isChecked = e.target.checked;
-  //   return null;
-  // };
-
+  }, [dispatch]);
   if (state.isLoading) {
-    return "        rrrrrrrr                              loading...";
+    return <SpringSpinner className={n.loader} color="#440BA0"/>
   }
   return (
     <div className={n.notes_wrapper}>
       <h2>Tasks</h2>
       <ul>
-        {state.notes.map((note, index) => {
-          debugger;
-          return (
-            <NotesItems
+        {state.notes.map((note, index) => { 
+        if (note.isCompleted) {
+         return null
+        }
+        return <NotesItems
+              key={note.id}
               index={index}
               note={note.title}
               setInputState={setInputState}
@@ -55,11 +49,10 @@ const Notes = () => {
               toggleEditNote={toggleEditNote}
               removeNotes={removeNotes}
               id={note.id}
-              CompleteNotes={CompleteNotes}
+              completeNotes={completeNotes}
               setCompleteNotes={setCompleteNotes}
             />
-          );
-        })}
+})}
       </ul>
     </div>
   );
