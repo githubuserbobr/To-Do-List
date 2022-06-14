@@ -14,7 +14,7 @@ const CompletedNotes = () => {
   } = useContext(ContextApp);
   return (
     <div className={c.completeNotes_wrapper}>
-      <h2 className={c.caption}>Completed</h2>
+      <h2 className={c.caption}>{`Completed(${state.notes.filter(item => item.isCompleted).length})`}</h2>
       {state.notes.map((note, index) => {
         if (note.isCompleted) {
           return (

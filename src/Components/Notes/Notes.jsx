@@ -33,7 +33,10 @@ const Notes = () => {
   }
   return (
     <div className={n.notes_wrapper}>
-      <h2>Tasks</h2>
+      <div className={n.total_counter}>
+        Total:{state.notes.length}
+      </div>
+      <h2>{`Tasks (${state.notes.filter(item => !item.isCompleted).length})`}</h2>
       <ul>
         {state.notes.map((note, index) => { 
         if (note.isCompleted) {
